@@ -1,0 +1,17 @@
+{
+  "name": "08-odin-tictactoe",
+  "version": "1.0.0",
+  "description": "**Live 👉** [here](https://keadonm.github.io/08-odin-tictactoe/)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^8.35.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.27.5"
+  }
+}

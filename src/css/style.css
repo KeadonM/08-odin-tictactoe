@@ -1,0 +1,39 @@
+/***---RESET AND VARIABLES---***/
+:root {
+  /*colours*/
+  --primary-dark: #333;
+  --primary-light: #ededed;
+  --secondary-light: #fafafa;
+
+  /*spacing*/
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 32px;
+  --spacing-xl: 48px;
+
+  /*misc*/
+  --border-radius: 8px;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  font: inherit;
+  box-sizing: border-box;
+} 
+
+html {code
+  color-scheme: dark light;
+}
+
+img, picture, svg, vide {
+  display: block;
+  max-width: 100%;
+}
+
+body {
+  font-family: 'Roboto', Arial, sans-serif;
+}
