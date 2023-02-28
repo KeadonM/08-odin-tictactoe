@@ -2,6 +2,7 @@
 :root {
   /*colours*/
   --primary-dark: #333;
+  --secondary-dark: #747474;
   --primary-light: #ededed;
   --secondary-light: #fafafa;
 
@@ -23,17 +24,45 @@
   padding: 0;
   font: inherit;
   box-sizing: border-box;
-} 
-
-html {code
-  color-scheme: dark light;
 }
 
-img, picture, svg, vide {
+html {
+  /*color-scheme: dark light;*/
+}
+
+img,
+picture,
+svg,
+vide {
   display: block;
   max-width: 100%;
 }
 
 body {
   font-family: 'Roboto', Arial, sans-serif;
+}
+
+main {
+  height: 100vh;
+  display: grid;
+  justify-content: center;
+  align-content: center;
+}
+
+#game-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: var(--spacing-md);
+
+  width: 250px;
+  height: 250px;
+}
+
+.board-element {
+  background-color: var(--secondary-dark);
+  text-align: center;
+
+  width: 64px;
+  height: 64px;
 }
