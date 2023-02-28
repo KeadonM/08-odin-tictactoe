@@ -1,43 +1,111 @@
 const gameContainer = document.querySelector('#game-container');
 
 const Player = (name, symbol) => {
-  const active = false;
+  let active = false;
+
+  const toggleActive = () => {
+    active = !active;
+  };
+
+  const isActive = () => active;
 
   return {
     name,
     symbol,
-    active,
+    isActive,
+    toggleActive,
   };
 };
 
 const gameBoard = (() => {
-  const gameState = ['-', '-', '-', '-', '-', '-', '-', '-', '-'];
+  const fieldState = [
+    ['-', '-', '-'],
+    ['-', '-', '-'],
+    ['-', '-', '-'],
+  ];
 
-  const updateState = (index, symbol) => {
-    gameState[index] = symbol;
+  const updateState = (x, y, symbol) => {
+    fieldState[x][y] = symbol;
   };
 
-  return { gameState, updateState };
+  return { fieldState, updateState };
 })();
 
 const gameController = (() => {
+  let isGameActive = false;
   let player1 = Player('PlaceHolder', 'X');
   let player2 = Player('PlaceHolder', 'O');
 
-  const takeTurn = (index) => {
-    let symbol;
+  const checkGameOver = (symbol) => {
+    const checkHorizontal = () => {
+      for (let row = 0; row < 3; row++) {
+        let hasLine = true;
+        for (let col = 0; col < 3; col++) {
+          const currentSymbol = gameBoard.fieldState[row][col];
+          if (currentSymbol !== symbol) {
+            hasLine = false;
+            break;
+          }
+        }
+        if (hasLine) return true;
+      }
 
-    if (player1.active) {
-      symbol = player1.symbol;
-      player1.active = false;
-      player2.active = true;
-    } else {
-      symbol = player2.symbol;
-      player2.active = false;
-      player1.active = true;
+      return false;
+    };
+
+    const checkVertical = () => {
+      for (let col = 0; col < 3; col++) {
+        let hasLine = true;
+        for (let row = 0; row < 3; row++) {
+          const currentSymbol = gameBoard.fieldState[row][col];
+          if (currentSymbol !== symbol) {
+            hasLine = false;
+            break;
+          }
+        }
+        if (hasLine) return true;
+      }
+
+      return false;
+    };
+
+    const checkDiagonals = () => {
+      let leftToRightWin = true;
+      let rightToLeftWin = true;
+
+      for (let i = 0; i < 3; i++) {
+        if (gameBoard.fieldState[i][i] !== symbol) {
+          leftToRightWin = false;
+        }
+        if (gameBoard.fieldState[i][2 - i] !== symbol) {
+          rightToLeftWin = false;
+        }
+      }
+
+      return leftToRightWin || rightToLeftWin;
+    };
+
+    return checkHorizontal() || checkVertical() || checkDiagonals();
+  };
+
+  const takeTurn = (x, y) => {
+    if (
+      gameBoard.fieldState[x][y] === player1.symbol ||
+      gameBoard.fieldState[x][y] === player2.symbol ||
+      !isGameActive
+    )
+      return undefined;
+
+    const symbol = player1.isActive() ? player1.symbol : player2.symbol;
+
+    player1.toggleActive();
+    player2.toggleActive();
+
+    gameBoard.updateState(x, y, symbol);
+    if (checkGameOver(symbol)) {
+      console.log(`Winner: ${symbol}`);
+      isGameActive = false;
     }
-
-    gameBoard.updateState(index, symbol);
     return symbol;
   };
 
@@ -45,7 +113,8 @@ const gameController = (() => {
     player1 = Player(playerOneName, 'X');
     player2 = Player(playerTwoName, 'O');
 
-    player1.active = true;
+    player1.toggleActive();
+    isGameActive = true;
   };
 
   return { takeTurn, init };
@@ -64,14 +133,16 @@ const displayController = (() => {
   };
 
   const init = () => {
-    gameBoard.gameState.forEach((elementState, i) => {
-      const element = buildElement(elementState);
-      element.addEventListener('click', () => {
-        const symbol = gameController.takeTurn(i);
-        element.querySelector('p').textContent = symbol;
+    gameBoard.fieldState.forEach((horizontalArray, x) => {
+      horizontalArray.forEach((gameBoardSquare, y) => {
+        const element = buildElement(gameBoardSquare);
+        element.addEventListener('click', () => {
+          const symbol = gameController.takeTurn(x, y);
+          if (symbol !== undefined)
+            element.querySelector('p').textContent = symbol;
+        });
+        gameContainer.appendChild(element);
       });
-
-      gameContainer.appendChild(element);
     });
   };
 
