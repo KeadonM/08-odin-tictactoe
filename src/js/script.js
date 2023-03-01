@@ -148,7 +148,10 @@ const displayController = (() => {
         const element = buildElement(gameBoardSquare);
         element.addEventListener('click', () => {
           const symbol = gameController.takeTurn(x, y);
-          if (symbol !== undefined) element.textContent = symbol;
+          if (symbol !== undefined) {
+            element.textContent = symbol;
+            element.classList.add('fade-in');
+          }
         });
         gameContainer.appendChild(element);
       });
