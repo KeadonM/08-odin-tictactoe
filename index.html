@@ -14,9 +14,71 @@
     <title>Tic Tac Toe</title>
   </head>
   <body>
-    <header></header>
+    <header>
+      <p>Tic Tac Toe</p>
+      <button id="reset-btn">Reset</button>
+    </header>
     <main>
-      <div id="game-container"></div>
+      <form id="game-form" action="http://httpbin.org/post" method="post">
+        <fieldset class="player-1 card">
+          <legend>Player One</legend>
+          <div class="player-name form-row">
+            <input
+              type="text"
+              id="player1-name"
+              name="player1-name"
+              placeholder="Name"
+              maxlength="16"
+              required />
+          </div>
+
+          <div class="radio-group form-row">
+            <input
+              id="first-move-radio"
+              name="first-move"
+              type="radio"
+              value="player1"
+              checked />
+            <label for="first-move-radio" class="radio-label">First Move</label>
+          </div>
+        </fieldset>
+
+        <div id="game-container"></div>
+
+        <fieldset class="player-2 card">
+          <legend>Player Two</legend>
+          <div class="player-name form-row">
+            <input
+              type="text"
+              id="player2-name"
+              name="player2-name"
+              placeholder="Name"
+              maxlength="16"
+              required />
+          </div>
+
+          <div class="radio-group form-row">
+            <input
+              id="first-move-radio"
+              name="first-move"
+              type="radio"
+              value="player2" />
+            <label for="first-move-radio" class="radio-label">First Move</label>
+          </div>
+        </fieldset>
+      </form>
+      <button id="submit-btn" form="game-form">submit</button>
     </main>
+
+    <footer>
+      <a id="copyright" href="https://github.com/keadonm" target="_blank">
+        Copyright ©
+        <script>
+          document.write(new Date().getFullYear());
+        </script>
+        KeadonM
+        <i class="fab fa-github"></i>
+      </a>
+    </footer>
   </body>
 </html>

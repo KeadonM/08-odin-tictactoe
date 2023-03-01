@@ -2,7 +2,7 @@
 :root {
   /*colours*/
   --primary-dark: #333;
-  --secondary-dark: #747474;
+  --secondary-dark: #979797;
   --primary-light: #ededed;
   --secondary-light: #fafafa;
 
@@ -39,14 +39,70 @@ vide {
 }
 
 body {
+  color: var(--primary-dark);
+  background-color: var(--primary-light);
   font-family: 'Roboto', Arial, sans-serif;
 }
 
+input,
+button {
+  border: none;
+  outline: none;
+  color: inherit;
+  background-color: var(--primary-light);
+  border-radius: var(--border-radius);
+}
+
+button:hover {
+  filter: brightness(95%);
+  box-shadow: var(--shadow);
+}
+
+/***---HEADER---***/
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-lg);
+  font-size: 1.24rem;
+  font-weight: 700;
+  background-color: var(--secondary-light);
+}
+
+#reset-btn {
+  width: 80px;
+  height: 40px;
+}
+
+/***---MAIN---***/
+
 main {
-  height: 100vh;
   display: grid;
-  justify-content: center;
-  align-content: center;
+  margin: auto;
+}
+
+#submit-btn {
+  background-color: var(--secondary-dark);
+  justify-self: center;
+  margin-top: var(--spacing-lg);
+  width: 100px;
+  height: 40px;
+}
+
+#game-form {
+  display: flex;
+  gap: var(--spacing-lg);
+}
+
+.card {
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius);
+  background-color: var(--secondary-light);
+}
+
+.player-name {
+  background-color: var(--primary-light);
 }
 
 #game-container {
@@ -54,15 +110,54 @@ main {
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
   gap: var(--spacing-md);
-
-  width: 250px;
-  height: 250px;
 }
 
 .board-element {
   background-color: var(--secondary-dark);
-  text-align: center;
-
   width: 64px;
   height: 64px;
+}
+
+/***---FOOTER---***/
+
+body {
+  /* footer support */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: auto;
+  padding: var(--spacing-sm);
+  padding-top: var(--spacing-lg);
+}
+
+#copyright {
+  font-size: 1.24rem;
+  font-weight: 700;
+  text-decoration-line: none;
+  letter-spacing: 0.5px;
+  color: var(--secondary-dark);
+}
+
+.fa-github {
+  font-size: 1.38rem;
+  transition: transform 0.4s ease-in-out;
+}
+
+.fa-github:hover {
+  transform: rotate(360deg) scale(1.2);
+}
+
+@media screen and (max-width: 200px) {
+  #game-form {
+    flex-direction: column;
+  }
+  #game-container {
+    order: -1;
+  }
 }
