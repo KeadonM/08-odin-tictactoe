@@ -1,5 +1,3 @@
-const gameContainer = document.querySelector('#game-container');
-
 const Player = (name, symbol) => {
   let active = false;
 
@@ -121,6 +119,20 @@ const gameController = (() => {
 })();
 
 const displayController = (() => {
+  const gameContainer = document.querySelector('#game-container');
+  const radioBtnSymbolP1 = document.querySelector('#symbol-p1');
+  const radioBtnSymbolP2 = document.querySelector('#symbol-p2');
+
+  radioBtnSymbolP1.addEventListener('change', () => {
+    document.querySelector("[for='symbol-p1']").textContent = 'X';
+    document.querySelector("[for='symbol-p2']").textContent = 'O';
+  });
+
+  radioBtnSymbolP2.addEventListener('change', () => {
+    document.querySelector("[for='symbol-p2']").textContent = 'X';
+    document.querySelector("[for='symbol-p1']").textContent = 'O';
+  });
+
   const buildElement = (elementState) => {
     const element = document.createElement('button');
     element.className = 'board-element';

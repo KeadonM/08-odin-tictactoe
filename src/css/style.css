@@ -7,11 +7,13 @@
   --secondary-light: #fafafa;
 
   /*spacing*/
-  --spacing-xs: 4px;
-  --spacing-sm: 8px;
+  --spacing-xxs: 4px;
+  --spacing-xs: 8px;
+  --spacing-sm: 12px;
   --spacing-md: 16px;
-  --spacing-lg: 32px;
-  --spacing-xl: 48px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-xxl: 48px;
 
   /*misc*/
   --border-radius: 8px;
@@ -45,6 +47,7 @@ body {
 }
 
 input,
+select,
 button {
   border: none;
   outline: none;
@@ -64,7 +67,7 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: var(--spacing-lg);
+  padding: var(--spacing-xl);
   font-size: 1.24rem;
   font-weight: 700;
   background-color: var(--secondary-light);
@@ -78,42 +81,59 @@ header {
 /***---MAIN---***/
 
 main {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   margin: auto;
 }
 
+/***---Form---****/
+
+#game-form {
+  display: flex;
+  gap: var(--spacing-xl);
+  margin: var(--spacing-xl);
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xxs);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--border-radius);
+  background-color: var(--secondary-light);
+  min-width: 156px;
+}
+
+.card-row {
+  height: 32px;
+  display: flex;
+  align-items: center;
+}
+
+.card .card-row:nth-of-type(n + 2) {
+  padding-left: var(--spacing-xxs);
+}
+
+.player-name > input {
+  padding-left: var(--spacing-xxs);
+  min-width: 0;
+  width: 100%;
+  height: 32px;
+}
+
+#rounds-dropdown,
+#board-size-dropdown {
+  height: 100%;
+}
+
 #submit-btn {
+  align-self: center;
   background-color: var(--secondary-dark);
-  justify-self: center;
-  margin-top: var(--spacing-lg);
   width: 100px;
   height: 40px;
 }
 
-#game-form {
-  display: flex;
-  gap: var(--spacing-lg);
-  margin: var(--spacing-lg);
-}
-
-.card {
-  padding: var(--spacing-md);
-  border-radius: var(--border-radius);
-  background-color: var(--secondary-light);
-}
-
-.card-row {
-  min-width: 100px;
-}
-
-.player-name {
-  background-color: var(--primary-light);
-}
-
-.player-name > input {
-  min-width: 0;
-  width: 100%;
-}
+/***---Gameboard---****/
 
 #game-container {
   display: grid;
@@ -142,8 +162,8 @@ footer {
   align-items: center;
   justify-content: center;
   margin-top: auto;
-  padding: var(--spacing-sm);
-  padding-top: var(--spacing-lg);
+  padding: var(--spacing-xs);
+  padding-top: var(--spacing-xl);
 }
 
 #copyright {
@@ -165,7 +185,7 @@ footer {
 
 /***---MEDIA QUERIES---***/
 
-@media screen and (max-width: 625px) {
+@media screen and (max-width: 660px) {
   #game-form {
     flex-direction: column;
   }

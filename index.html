@@ -10,6 +10,9 @@
       href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
       rel="stylesheet" />
     <link rel="stylesheet" href="./src/css/style.css" />
+    <script
+      src="https://kit.fontawesome.com/7881ce7c0a.js"
+      crossorigin="anonymous"></script>
     <script src="./src/js/script.js" defer></script>
     <title>Tic Tac Toe</title>
   </head>
@@ -26,22 +29,55 @@
             <input
               type="text"
               id="player1-name"
-              name="player1-name"
+              name="namePlayer1"
               placeholder="Name"
               maxlength="16"
               required />
           </div>
 
-          <div class="radio-group card-row">
+          <div class="radio-first-move card-row">
             <input
-              id="first-move-player1"
-              name="first-move"
+              class="radio"
               type="radio"
+              id="first-move-p1"
+              name="firstMove"
               value="player1"
               checked />
-            <label for="first-move-player1" class="radio-label"
-              >First Move</label
-            >
+            <label for="first-move-p1" class="radio-label">First Move</label>
+          </div>
+
+          <div class="radio-symbol card-row">
+            <input
+              class="radio"
+              type="radio"
+              id="symbol-p1"
+              name="isSymbolX"
+              value="player1"
+              checked />
+            <label for="symbol-p1" class="radio-label">X</label>
+          </div>
+
+          <div class="game-setting card-row">
+            <label for="rounds-dropdown">Best out of: </label>
+            <select id="rounds-dropdown" name="rounds">
+              <option value="1">1</option>
+              <option value="3">3</option>
+              <option value="5">5</option>
+              <option value="7">7</option>
+              <option value="9">9</option>
+              <option value="11">11</option>
+              <option value="13">13</option>
+            </select>
+          </div>
+
+          <div class="game-setting card-row">
+            <label for="board-size-dropdown">Board Size: </label>
+            <select id="board-size-dropdown" name="boardSize">
+              <option value="3">3x3</option>
+              <option value="4">4x4</option>
+              <option value="5">5x5</option>
+              <option value="6">6x6</option>
+            </select>
           </div>
         </fieldset>
 
@@ -53,21 +89,63 @@
             <input
               type="text"
               id="player2-name"
-              name="player2-name"
+              name="namePlayer2"
               placeholder="Name"
               maxlength="16"
               required />
           </div>
 
-          <div class="radio-group card-row">
+          <div class="radio-first-move card-row">
             <input
-              id="first-move-player2"
-              name="first-move"
+              class="radio"
               type="radio"
+              id="first-move-p2"
+              name="firstMove"
               value="player2" />
-            <label for="first-move-player2" class="radio-label"
-              >First Move</label
-            >
+            <label for="first-move-p2" class="radio-label">First Move</label>
+          </div>
+
+          <div class="radio-symbol card-row">
+            <input
+              class="radio"
+              type="radio"
+              id="symbol-p2"
+              name="isSymbolX"
+              value="player2" />
+            <label for="symbol-p2" class="radio-label">O</label>
+          </div>
+
+          <div class="checkbox-comp card-row">
+            <input
+              class="checkbox"
+              type="checkbox"
+              id="check-comp"
+              name="isComp" />
+            <label for="check-comp" class="checkbox-label">Computer</label>
+          </div>
+
+          <div class="radio-comp-diff card-row">
+            <input
+              class="radio"
+              type="radio"
+              id="diff-easy"
+              name="compDiff"
+              value="easy" />
+            <label for="diff-easy" class="radio-label">🐵</label>
+            <input
+              class="radio"
+              type="radio"
+              id="diff-medium"
+              name="compDiff"
+              value="medium" />
+            <label for="diff-medium" class="radio-label">🤖</label>
+            <input
+              class="radio"
+              type="radio"
+              id="diff-hard"
+              name="compDiff"
+              value="hard" />
+            <label for="diff-hard" class="radio-label">🧙</label>
           </div>
         </fieldset>
       </form>
