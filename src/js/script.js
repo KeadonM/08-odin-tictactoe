@@ -122,13 +122,11 @@ const gameController = (() => {
 
 const displayController = (() => {
   const buildElement = (elementState) => {
-    const element = document.createElement('div');
+    const element = document.createElement('button');
     element.className = 'board-element';
+    element.textContent = elementState;
+    element.type = 'button';
 
-    const p = document.createElement('p');
-    p.textContent = elementState;
-
-    element.appendChild(p);
     return element;
   };
 
@@ -138,8 +136,7 @@ const displayController = (() => {
         const element = buildElement(gameBoardSquare);
         element.addEventListener('click', () => {
           const symbol = gameController.takeTurn(x, y);
-          if (symbol !== undefined)
-            element.querySelector('p').textContent = symbol;
+          if (symbol !== undefined) element.textContent = symbol;
         });
         gameContainer.appendChild(element);
       });
