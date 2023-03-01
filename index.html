@@ -22,7 +22,7 @@
       <form id="game-form" action="http://httpbin.org/post" method="post">
         <fieldset class="player-1 card">
           <legend>Player One</legend>
-          <div class="player-name form-row">
+          <div class="player-name card-row">
             <input
               type="text"
               id="player1-name"
@@ -32,14 +32,16 @@
               required />
           </div>
 
-          <div class="radio-group form-row">
+          <div class="radio-group card-row">
             <input
-              id="first-move-radio"
+              id="first-move-player1"
               name="first-move"
               type="radio"
               value="player1"
               checked />
-            <label for="first-move-radio" class="radio-label">First Move</label>
+            <label for="first-move-player1" class="radio-label"
+              >First Move</label
+            >
           </div>
         </fieldset>
 
@@ -47,7 +49,7 @@
 
         <fieldset class="player-2 card">
           <legend>Player Two</legend>
-          <div class="player-name form-row">
+          <div class="player-name card-row">
             <input
               type="text"
               id="player2-name"
@@ -57,13 +59,15 @@
               required />
           </div>
 
-          <div class="radio-group form-row">
+          <div class="radio-group card-row">
             <input
-              id="first-move-radio"
+              id="first-move-player2"
               name="first-move"
               type="radio"
               value="player2" />
-            <label for="first-move-radio" class="radio-label">First Move</label>
+            <label for="first-move-player2" class="radio-label"
+              >First Move</label
+            >
           </div>
         </fieldset>
       </form>

@@ -93,6 +93,7 @@ main {
 #game-form {
   display: flex;
   gap: var(--spacing-lg);
+  margin: var(--spacing-lg);
 }
 
 .card {
@@ -101,8 +102,17 @@ main {
   background-color: var(--secondary-light);
 }
 
+.card-row {
+  min-width: 100px;
+}
+
 .player-name {
   background-color: var(--primary-light);
+}
+
+.player-name > input {
+  min-width: 0;
+  width: 100%;
 }
 
 #game-container {
@@ -153,7 +163,9 @@ footer {
   transform: rotate(360deg) scale(1.2);
 }
 
-@media screen and (max-width: 200px) {
+/***---MEDIA QUERIES---***/
+
+@media screen and (max-width: 625px) {
   #game-form {
     flex-direction: column;
   }
