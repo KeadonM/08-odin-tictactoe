@@ -19,12 +19,11 @@
   <body>
     <header>
       <p>Tic Tac Toe</p>
-      <button id="reset-btn">Reset</button>
     </header>
     <main>
       <form id="game-form" action="http://httpbin.org/post" method="post">
         <fieldset class="player-1 card">
-          <legend>Player One</legend>
+          <legend class="card-title">Player One</legend>
           <div class="player-name card-row">
             <input
               type="text"
@@ -84,7 +83,7 @@
         <div id="game-container"></div>
 
         <fieldset class="player-2 card">
-          <legend>Player Two</legend>
+          <legend class="card-title">Player Two</legend>
           <div class="player-name card-row">
             <input
               type="text"
@@ -149,7 +148,10 @@
           </div>
         </fieldset>
       </form>
-      <button id="submit-btn" form="game-form">submit</button>
+      <div #form-buttons>
+        <button id="reset-btn" type="reset" form="game-form">Reset</button>
+        <button id="submit-btn" form="game-form">Start</button>
+      </div>
     </main>
 
     <footer>

@@ -2,9 +2,12 @@
 :root {
   /*colours*/
   --primary-dark: #333;
-  --secondary-dark: #979797;
+  --secondary-dark: #a7a7a7;
   --primary-light: #ededed;
   --secondary-light: #fafafa;
+  --red: #ff9595;
+  --green: #bfff95;
+  --blue: #95e6ff;
 
   /*spacing*/
   --spacing-xxs: 4px;
@@ -17,6 +20,7 @@
 
   /*misc*/
   --border-radius: 8px;
+  --shadow: 0px 1px 2px rgba(0, 0, 0, 0.14);
 }
 
 *,
@@ -26,10 +30,6 @@
   padding: 0;
   font: inherit;
   box-sizing: border-box;
-}
-
-html {
-  /*color-scheme: dark light;*/
 }
 
 img,
@@ -57,8 +57,8 @@ button {
 }
 
 button:hover {
-  filter: brightness(95%);
-  box-shadow: var(--shadow);
+  filter: brightness(98%);
+  scale: 1.03;
 }
 
 /***---HEADER---***/
@@ -68,9 +68,10 @@ header {
   justify-content: space-between;
   align-items: center;
   padding: var(--spacing-xl);
-  font-size: 1.24rem;
+  font-size: 2rem;
   font-weight: 700;
   background-color: var(--secondary-light);
+  box-shadow: var(--shadow);
 }
 
 #reset-btn {
@@ -83,6 +84,7 @@ header {
 main {
   display: flex;
   flex-direction: column;
+  align-items: center;
   margin: auto;
 }
 
@@ -94,12 +96,20 @@ main {
   margin: var(--spacing-xl);
 }
 
+.card-title {
+  font-weight: 500;
+  font-size: 1.16rem;
+  padding: 2px;
+}
+
 .card {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-xxs);
   padding: var(--spacing-xs) var(--spacing-sm);
+  border: 2px solid rgba(0, 0, 0, 0.18);
   border-radius: var(--border-radius);
+  color: var(--primary-dark);
   background-color: var(--secondary-light);
   min-width: 156px;
 }
@@ -108,6 +118,7 @@ main {
   height: 32px;
   display: flex;
   align-items: center;
+  gap: var(--spacing-xxs);
 }
 
 .card .card-row:nth-of-type(n + 2) {
@@ -126,11 +137,22 @@ main {
   height: 100%;
 }
 
+#reset-btn,
 #submit-btn {
-  align-self: center;
+  font-size: 1.06rem;
+  font-weight: 700;
   background-color: var(--secondary-dark);
+  margin: 0 var(--spacing-sm);
   width: 100px;
   height: 40px;
+}
+
+#reset-btn {
+  background-color: var(--red);
+}
+
+#submit-btn {
+  background-color: var(--green);
 }
 
 /***---Gameboard---****/
@@ -143,7 +165,10 @@ main {
 }
 
 .board-element {
-  background-color: var(--secondary-dark);
+  font-size: 1.16rem;
+  font-weight: 700;
+  background-color: var(--secondary-light);
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.33);
   width: 64px;
   height: 64px;
 }
@@ -185,7 +210,7 @@ footer {
 
 /***---MEDIA QUERIES---***/
 
-@media screen and (max-width: 660px) {
+@media screen and (max-width: 680px) {
   #game-form {
     flex-direction: column;
   }

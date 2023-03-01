@@ -17,9 +17,9 @@ const Player = (name, symbol) => {
 
 const gameBoard = (() => {
   const fieldState = [
-    ['-', '-', '-'],
-    ['-', '-', '-'],
-    ['-', '-', '-'],
+    ['', '', ''],
+    ['', '', ''],
+    ['', '', ''],
   ];
 
   const updateState = (x, y, symbol) => {
