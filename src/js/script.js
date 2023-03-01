@@ -107,31 +107,21 @@ const gameController = (() => {
     return symbol;
   };
 
-  const init = (playerOneName, playerTwoName) => {
-    player1 = Player(playerOneName, 'X');
-    player2 = Player(playerTwoName, 'O');
+  const init = (nameP1, nameP2, isSymbolX, firstMove, rounds) => {
+    player1 = Player(nameP1, isSymbolX === 'player1' ? 'X' : 'O');
+    player2 = Player(nameP2, isSymbolX === 'player2' ? 'X' : 'O');
 
-    player1.toggleActive();
+    if (firstMove === 'player1') player1.toggleActive();
+    else player2.toggleActive();
+
     isGameActive = true;
   };
 
   return { takeTurn, init };
 })();
 
-const displayController = (() => {
+(function displayController() {
   const gameContainer = document.querySelector('#game-container');
-  const radioBtnSymbolP1 = document.querySelector('#symbol-p1');
-  const radioBtnSymbolP2 = document.querySelector('#symbol-p2');
-
-  radioBtnSymbolP1.addEventListener('change', () => {
-    document.querySelector("[for='symbol-p1']").textContent = 'X';
-    document.querySelector("[for='symbol-p2']").textContent = 'O';
-  });
-
-  radioBtnSymbolP2.addEventListener('change', () => {
-    document.querySelector("[for='symbol-p2']").textContent = 'X';
-    document.querySelector("[for='symbol-p1']").textContent = 'O';
-  });
 
   const buildElement = (elementState) => {
     const element = document.createElement('button');
@@ -142,7 +132,7 @@ const displayController = (() => {
     return element;
   };
 
-  const init = () => {
+  const init = (() => {
     gameBoard.fieldState.forEach((horizontalArray, x) => {
       horizontalArray.forEach((gameBoardSquare, y) => {
         const element = buildElement(gameBoardSquare);
@@ -156,14 +146,38 @@ const displayController = (() => {
         gameContainer.appendChild(element);
       });
     });
-  };
+  })();
 
   return { init };
 })();
 
-function startGame() {
-  displayController.init();
-  gameController.init('Fred', 'John');
-}
+(function formController() {
+  const form = document.querySelector('#game-form');
+  const radioBtnSymbolP1 = document.querySelector('#symbol-p1');
+  const radioBtnSymbolP2 = document.querySelector('#symbol-p2');
 
-startGame();
+  radioBtnSymbolP1.addEventListener('change', () => {
+    document.querySelector("[for='symbol-p1']").textContent = 'X';
+    document.querySelector("[for='symbol-p2']").textContent = 'O';
+  });
+
+  radioBtnSymbolP2.addEventListener('change', () => {
+    document.querySelector("[for='symbol-p2']").textContent = 'X';
+    document.querySelector("[for='symbol-p1']").textContent = 'O';
+  });
+
+  const onSubmit = () => {
+    const nameP1 = form.elements.nameP1.value;
+    const nameP2 = form.elements.nameP2.value;
+    const isSymbolX = form.elements.isSymbolX.value;
+    const firstMove = form.elements.firstMove.value;
+    const rounds = form.elements.rounds.value;
+
+    gameController.init(nameP1, nameP2, isSymbolX, firstMove, rounds);
+  };
+
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
+    onSubmit();
+  });
+})();
