@@ -4,7 +4,6 @@ const Player = (name, symbol, card) => {
 
   const toggleActive = () => {
     active = !active;
-    console.log(card);
     card.classList.toggle('active');
   };
 
@@ -63,7 +62,7 @@ const gameController = (() => {
       player2.getScore(),
       `${currentRound} / ${totalRounds}`
     );
-    displayController.toggleRndBtnDisabled();
+    displayController.toggleRoundButtonDisabled();
   };
 
   const onGameOver = (player) => {
@@ -80,6 +79,10 @@ const gameController = (() => {
         `${currentRound} / ${totalRounds}`
       );
     }
+    displayController.toggleRoundBtnVisible();
+    currentRound = 0;
+    totalRounds = 0;
+    player.toggleActive();
   };
 
   const checkRoundOver = (player) => {
@@ -149,13 +152,11 @@ const gameController = (() => {
       player.updateScore();
       currentRound++;
       onRoundOver();
-      console.log(`Round Winner: ${player.name}`);
       return true;
     }
 
     if (checkTie()) {
       onRoundOver();
-      console.log(`Round Tie`);
       return true;
     }
 
@@ -165,7 +166,11 @@ const gameController = (() => {
   const checkGameOver = (player) => {
     if (player.getScore() > totalRounds / 2) {
       onGameOver(player);
+
+      return true;
     }
+
+    return false;
   };
 
   const takeTurn = (x, y) => {
@@ -178,18 +183,18 @@ const gameController = (() => {
     const activePlayer = player1.isActive() ? player1 : player2;
     gameBoard.updateState(x, y, activePlayer.symbol);
 
-    player1.toggleActive();
-    player2.toggleActive();
+    checkRoundOver(activePlayer);
 
-    if (checkRoundOver(activePlayer)) {
-      checkGameOver(activePlayer);
+    if (!checkGameOver(activePlayer)) {
+      player1.toggleActive();
+      player2.toggleActive();
     }
 
     return activePlayer;
   };
 
   const init = (nameP1, nameP2, isSymbolX, firstMove, rounds) => {
-    totalRounds = rounds;
+    totalRounds = parseInt(rounds);
     player1 = Player(
       nameP1,
       isSymbolX === 'player1' ? 'X' : 'O',
@@ -223,11 +228,14 @@ const displayController = (() => {
     startBtn.classList.toggle('active');
   };
 
-  const toggleRndBtnVisible = () => {
+  const toggleRoundBtnVisible = () => {
     nextRndBtn.classList.toggle('active');
   };
+  const hideRoundButton = () => {
+    nextRndBtn.classList.remove('active');
+  };
 
-  const toggleRndBtnDisabled = () => {
+  const toggleRoundButtonDisabled = () => {
     nextRndBtn.toggleAttribute('disabled');
   };
 
@@ -279,7 +287,7 @@ const displayController = (() => {
   };
 
   const onNextRound = () => {
-    toggleRndBtnDisabled();
+    toggleRoundButtonDisabled();
     gameBoard.resetState();
     resetDisplay();
     toggleElements();
@@ -295,8 +303,9 @@ const displayController = (() => {
     resetDisplay,
     toggleResetBtnVisible,
     toggleStartBtnVisible,
-    toggleRndBtnVisible,
-    toggleRndBtnDisabled,
+    toggleRoundBtnVisible,
+    hideRoundButton,
+    toggleRoundButtonDisabled,
     toggleScoreboardVisible,
     updateScoreboard,
     toggleElements,
@@ -330,10 +339,7 @@ const displayController = (() => {
     displayController.toggleElements();
     displayController.toggleResetBtnVisible();
     displayController.toggleStartBtnVisible();
-    if (rounds > 1) {
-      displayController.toggleRndBtnVisible();
-      displayController.toggleRndBtnDisabled();
-    }
+    displayController.toggleRoundBtnVisible();
 
     document.querySelector('.player-1.card').toggleAttribute('disabled');
     document.querySelector('.player-2.card').toggleAttribute('disabled');
@@ -347,9 +353,12 @@ const displayController = (() => {
     displayController.toggleScoreboardVisible();
     displayController.toggleResetBtnVisible();
     displayController.toggleStartBtnVisible();
+    displayController.hideRoundButton();
 
     document.querySelector('.player-1.card').removeAttribute('disabled');
     document.querySelector('.player-2.card').removeAttribute('disabled');
+    document.querySelector('.player-1.card').classList.remove('active');
+    document.querySelector('.player-2.card').classList.remove('active');
     document.querySelector('.card-title.p1').textContent = 'Player One';
     document.querySelector('.card-title.p2').textContent = 'Player Two';
 
@@ -362,7 +371,7 @@ const displayController = (() => {
     onSubmit();
   });
 
-  form.addEventListener('reset', (event) => {
+  form.addEventListener('reset', () => {
     onReset();
   });
 })();

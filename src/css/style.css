@@ -150,7 +150,7 @@ main {
 
 .card.active {
   scale: 1.05;
-  filter: brightness(102%);
+  filter: brightness(101%);
   transition: 0.12s;
 }
 
