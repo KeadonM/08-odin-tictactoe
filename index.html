@@ -26,137 +26,166 @@
         <p class="score-card" id="rounds-remaining">0/0</p>
         <p class="score-card p2">0</p>
       </div>
+
       <form id="game-form">
-        <fieldset class="player-1 card animation">
-          <legend class="card-title p1">Player One</legend>
-          <div class="player-name card-row">
-            <input
-              type="text"
-              id="player1-name"
-              name="nameP1"
-              placeholder="Name"
-              maxlength="16"
-              required />
-          </div>
+        <div class="game-setting rounds active">
+          <label for="rounds-dropdown">Best out of: </label>
+          <select id="rounds-dropdown" name="rounds">
+            <option value="1">1</option>
+            <option value="3">3</option>
+            <option value="5">5</option>
+            <option value="7">7</option>
+            <option value="9">9</option>
+            <option value="11">11</option>
+            <option value="13">13</option>
+          </select>
+        </div>
+        <div id="display">
+          <fieldset class="player-1 card animation">
+            <legend class="card-title p1">Player One</legend>
+            <div class="player-name card-row">
+              <input
+                type="text"
+                id="player1-name"
+                name="nameP1"
+                placeholder="Name"
+                maxlength="16"
+                required />
+            </div>
 
-          <div class="radio-first-move card-row">
-            <input
-              class="radio"
-              type="radio"
-              id="first-move-p1"
-              name="firstMove"
-              value="player1"
-              checked />
-            <label for="first-move-p1" class="radio-label">First Move</label>
-          </div>
+            <div class="radio-first-move card-row">
+              <input
+                class="radio"
+                type="radio"
+                id="first-move-p1"
+                name="firstMove"
+                value="player1"
+                checked />
+              <label for="first-move-p1" class="radio-label">First Move</label>
+            </div>
 
-          <div class="radio-symbol card-row">
-            <input
-              class="radio"
-              type="radio"
-              id="symbol-p1"
-              name="isSymbolX"
-              value="player1"
-              checked />
-            <label for="symbol-p1" class="radio-label">X</label>
-          </div>
+            <div class="radio-symbol card-row">
+              <input
+                class="radio"
+                type="radio"
+                id="symbol-p1"
+                name="isSymbolX"
+                value="player1"
+                checked />
+              <label for="symbol-p1" class="radio-label">X</label>
+            </div>
 
-          <div class="game-setting card-row">
-            <label for="rounds-dropdown">Best out of: </label>
-            <select id="rounds-dropdown" name="rounds">
-              <option value="1">1</option>
-              <option value="3">3</option>
-              <option value="5">5</option>
-              <option value="7">7</option>
-              <option value="9">9</option>
-              <option value="11">11</option>
-              <option value="13">13</option>
-            </select>
-          </div>
+            <div class="checkbox-comp card-row">
+              <input
+                class="checkbox"
+                type="checkbox"
+                id="check-comp-p1"
+                name="isCompP1" />
+              <label for="check-comp-p1" class="checkbox-label">Computer</label>
+            </div>
 
-          <div class="game-setting card-row">
-            <label for="board-size-dropdown">Board Size: </label>
-            <select id="board-size-dropdown" name="boardSize">
-              <option value="3">3x3</option>
-              <option value="4">4x4</option>
-              <option value="5">5x5</option>
-              <option value="6">6x6</option>
-            </select>
-          </div>
-        </fieldset>
+            <fieldset class="radio-comp-diff p1 card-row" disabled>
+              <input
+                class="radio"
+                type="radio"
+                id="diff-easy-p1"
+                name="compDiffP1"
+                value="easy" />
+              <label for="diff-easy-p1" class="radio-label">🐵</label>
+              <input
+                class="radio"
+                type="radio"
+                id="diff-medium-p1"
+                name="compDiffP1"
+                value="medium"
+                checked />
+              <label for="diff-medium-p1" class="radio-label">🤖</label>
+              <input
+                class="radio"
+                type="radio"
+                id="diff-hard-p1"
+                name="compDiffP1"
+                value="hard" />
+              <label for="diff-hard-p1" class="radio-label">🧙</label>
+            </fieldset>
+          </fieldset>
 
-        <div id="game-container"></div>
+          <div id="game-container"></div>
 
-        <fieldset class="player-2 card animation">
-          <legend class="card-title p2">Player Two</legend>
-          <div class="player-name card-row">
-            <input
-              type="text"
-              id="player2-name"
-              name="nameP2"
-              placeholder="Name"
-              maxlength="16"
-              required />
-          </div>
+          <fieldset class="player-2 card animation">
+            <legend class="card-title p2">Player Two</legend>
+            <div class="player-name card-row">
+              <input
+                type="text"
+                id="player2-name"
+                name="nameP2"
+                placeholder="Name"
+                maxlength="16"
+                required />
+            </div>
 
-          <div class="radio-first-move card-row">
-            <input
-              class="radio"
-              type="radio"
-              id="first-move-p2"
-              name="firstMove"
-              value="player2" />
-            <label for="first-move-p2" class="radio-label">First Move</label>
-          </div>
+            <div class="radio-first-move card-row">
+              <input
+                class="radio"
+                type="radio"
+                id="first-move-p2"
+                name="firstMove"
+                value="player2" />
+              <label for="first-move-p2" class="radio-label">First Move</label>
+            </div>
 
-          <div class="radio-symbol card-row">
-            <input
-              class="radio"
-              type="radio"
-              id="symbol-p2"
-              name="isSymbolX"
-              value="player2" />
-            <label for="symbol-p2" class="radio-label">O</label>
-          </div>
+            <div class="radio-symbol card-row">
+              <input
+                class="radio"
+                type="radio"
+                id="symbol-p2"
+                name="isSymbolX"
+                value="player2" />
+              <label for="symbol-p2" class="radio-label">O</label>
+            </div>
 
-          <div class="checkbox-comp card-row">
-            <input
-              class="checkbox"
-              type="checkbox"
-              id="check-comp"
-              name="isComp" />
-            <label for="check-comp" class="checkbox-label">Computer</label>
-          </div>
+            <div class="checkbox-comp card-row">
+              <input
+                class="checkbox"
+                type="checkbox"
+                id="check-comp-p2"
+                name="isCompP2" />
+              <label for="check-comp-p2" class="checkbox-label">Computer</label>
+            </div>
 
-          <div class="radio-comp-diff card-row">
-            <input
-              class="radio"
-              type="radio"
-              id="diff-easy"
-              name="compDiff"
-              value="easy" />
-            <label for="diff-easy" class="radio-label">🐵</label>
-            <input
-              class="radio"
-              type="radio"
-              id="diff-medium"
-              name="compDiff"
-              value="medium" />
-            <label for="diff-medium" class="radio-label">🤖</label>
-            <input
-              class="radio"
-              type="radio"
-              id="diff-hard"
-              name="compDiff"
-              value="hard" />
-            <label for="diff-hard" class="radio-label">🧙</label>
-          </div>
-        </fieldset>
+            <fieldset class="radio-comp-diff p2 card-row" disabled>
+              <input
+                class="radio"
+                type="radio"
+                id="diff-easy-p2"
+                name="compDiffP2"
+                value="easy" />
+              <label for="diff-easy-p2" class="radio-label">🐵</label>
+              <input
+                class="radio"
+                type="radio"
+                id="diff-medium-p2"
+                name="compDiffP2"
+                value="medium"
+                checked />
+              <label for="diff-medium-p2" class="radio-label">🤖</label>
+              <input
+                class="radio"
+                type="radio"
+                id="diff-hard-p2"
+                name="compDiffP2"
+                value="hard" />
+              <label for="diff-hard-p2" class="radio-label">🧙</label>
+            </fieldset>
+          </fieldset>
+        </div>
       </form>
       <div #form-buttons>
         <button id="reset-btn" type="reset" form="game-form">Reset</button>
         <button class="active" id="start-btn" form="game-form">Start</button>
-        <button id="rnd-btn" type="button" form="game-form">Next Round</button>
+        <button id="rnd-btn" type="button" form="game-form" disabled>
+          Next Round
+        </button>
       </div>
     </main>
 
