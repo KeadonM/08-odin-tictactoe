@@ -28,18 +28,33 @@ const Player = (name, symbol, card) => {
 const ComputerPlayer = (name, symbol, card, difficulty) => {
   const prototype = Player(name, symbol, card);
 
-  let botValues = [];
+  let botValues = {};
 
   (() => {
     switch (difficulty) {
       case 'easy':
-        botValues = [-1, 0, 2];
+        botValues = {
+          winValue: -1,
+          tieValue: 0,
+          lossValue: 2,
+          randomness: 0.25,
+        };
         break;
       case 'medium':
-        botValues = [1, -100, -1];
+        botValues = {
+          winValue: 1,
+          tieValue: -1,
+          lossValue: -1,
+          randomness: 0.5,
+        };
         break;
       case 'hard':
-        botValues = [1, 0, -1];
+        botValues = {
+          winValue: 1,
+          tieValue: 0,
+          lossValue: -1,
+          randomness: 0,
+        };
         break;
       default:
         botValues = [0, 0, 0];
@@ -70,11 +85,11 @@ const ComputerPlayer = (name, symbol, card, difficulty) => {
               scores[x][y] = -999999;
             } else {
               scores[x][y] = compMove
-                ? botValues[0] + depth
-                : botValues[2] - depth;
+                ? botValues.winValue + depth
+                : botValues.lossValue - depth;
             }
           } else if (gameController.checkTie(newState)) {
-            scores[x][y] = botValues[1];
+            scores[x][y] = botValues.tieValue;
           } else {
             const childScores = checkMove(newState, nextPlayer, depth + 1);
             const totalScore = childScores.reduce(
@@ -98,9 +113,14 @@ const ComputerPlayer = (name, symbol, card, difficulty) => {
 
     for (let x = 0; x < scores.length; x++) {
       for (let y = 0; y < scores[x].length; y++) {
+        const rand = Math.random();
         const score = scores[x][y];
-        if (score > bestScore) {
+        if (score > bestScore && rand > botValues.randomness) {
           bestScore = score;
+          bestMove = [x, y];
+        }
+
+        if (score === bestScore && rand < 0.5) {
           bestMove = [x, y];
         }
       }
@@ -115,8 +135,11 @@ const ComputerPlayer = (name, symbol, card, difficulty) => {
       true
     );
 
-    console.log(compMoves);
-    const bestMove = findBestMove(compMoves);
+    let bestMove = null;
+
+    while (bestMove === null) {
+      bestMove = findBestMove(compMoves);
+    }
 
     gameController.takeTurn(false, bestMove[0], bestMove[1]);
     displayController.updateElement(this, bestMove[0], bestMove[1]);
@@ -283,9 +306,7 @@ const gameController = (() => {
       activePlayer.updateScore();
       currentRound++;
       onRoundOver(activePlayer);
-      console.log('win');
     } else if (checkTie(gameBoard.getState())) {
-      console.log('tie');
       onRoundOver(activePlayer);
     } else {
       player1.toggleActive();
