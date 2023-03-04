@@ -78,10 +78,8 @@ const ComputerPlayer = (name, symbol, card, difficulty) => {
 
           if (gameController.checkRoundWin(currentSymbol, newState)) {
             if (depth === 0) {
-              console.log({ compMove, newState });
               scores[x][y] = 999999;
             } else if (depth === 1) {
-              console.log({ compMove, newState });
               scores[x][y] = -999999;
             } else {
               scores[x][y] = compMove
