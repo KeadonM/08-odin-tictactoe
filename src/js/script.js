@@ -254,7 +254,10 @@ const gameController = (() => {
     );
     displayController.enableRoundBtn();
 
-    checkGameOver(activePlayer);
+    if (!checkGameOver(activePlayer)) {
+      player1.toggleActive();
+      player2.toggleActive();
+    }
   };
 
   const checkGameOver = (player) => {
@@ -282,7 +285,6 @@ const gameController = (() => {
     displayController.toggleRoundBtnVisible();
     currentRound = 0;
     totalRounds = 0;
-    player.toggleActive();
     gameActive = false;
   };
 
@@ -311,10 +313,8 @@ const gameController = (() => {
     } else {
       player1.toggleActive();
       player2.toggleActive();
-
       checkIfBotsTurn();
     }
-
     return activePlayer;
   };
 
